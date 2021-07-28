@@ -1,4 +1,5 @@
 const auth = require("../middleware/auth");
+const login_auth = require("../middleware/login_auth")
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user.model");
 const express = require("express");
@@ -7,6 +8,13 @@ const router = express.Router();
 router.get("/current", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   res.send(user);
+});
+
+router.post("/login", login_auth, async (req, res) => {
+  console.log(req.auth_token)
+  res.send({
+    token_data:req.auth_token
+  })
 });
 
 router.post("/", async (req, res) => {
