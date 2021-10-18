@@ -19,6 +19,7 @@ module.exports = async function(req, res, next) {
           console.log("Password matches!")
           const token = user.generateAuthToken();
           req.auth_token = token;
+
           next();
         }
       })

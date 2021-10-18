@@ -1,6 +1,7 @@
 const config = require("config");
 const mongoose = require("mongoose");
 const usersRoute = require("./routes/user.route");
+const hireRoute = require("./routes/hire.route");
 const express = require("express");
 
 const router = express.Router();
@@ -15,11 +16,10 @@ if (!config.get("myprivatekey")) {
 mongoose
   .connect("mongodb://localhost/nodejsauth", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB..."))
-  .catch(err => console.error("Could not connect to MongoDB..."));
-
+  .catch((err) => console.error("Could not connect to MongoDB..."));
 
 router.use(express.json());
 //use users route for api/users
-router.use("/api/users", usersRoute);
+router.use("/register", usersRoute);
+router.use("/hire", hireRoute);
 module.exports = router;
-

@@ -1,9 +1,10 @@
 const auth = require("../middleware/auth");
-const login_auth = require("../middleware/login_auth")
+const login_auth = require("../middleware/login_auth");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user.model");
 const express = require("express");
 const router = express.Router();
+const fetch = require("node-fetch");
 
 router.get("/current", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
@@ -11,10 +12,10 @@ router.get("/current", auth, async (req, res) => {
 });
 
 router.post("/login", login_auth, async (req, res) => {
-  console.log(req.auth_token)
+  console.log(req.auth_token);
   res.send({
-    token_data:req.auth_token
-  })
+    token_data: req.auth_token,
+  });
 });
 
 router.post("/", async (req, res) => {
@@ -29,7 +30,8 @@ router.post("/", async (req, res) => {
   user = new User({
     name: req.body.name,
     password: req.body.password,
-    email: req.body.email
+    email: req.body.email,
+    group: req.body.group,
   });
   user.password = await bcrypt.hash(user.password, 10);
   await user.save();
@@ -39,7 +41,8 @@ router.post("/", async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
-    token_data:token
+    group: user.group,
+    token_data: token,
   });
 });
 
