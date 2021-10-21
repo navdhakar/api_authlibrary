@@ -26,7 +26,7 @@ router.post("/hire_us", async (req, res) => {
   // //find an existing Hire
   // let hire = await Hire.findOne({ email: req.body.email });
   // if (hire) return res.status(400).send("Hire already registered.");
-  console.log("request recieved");
+  console.log("hire_route:request recieved");
   hire = new Hire({
     company_name: req.body.company_name,
     email: req.body.email,

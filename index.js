@@ -23,4 +23,5 @@ router.use(express.json());
 //use users route for api/users
 router.use("/register", usersRoute);
 router.use("/hire", hireRoute);
+router.use("/findwork", workRoute);
 module.exports = router;

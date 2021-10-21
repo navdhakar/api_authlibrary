@@ -6,7 +6,8 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 
-router.get("/current", auth, async (req, res) => {
+router.get("/work", async (req, res) => {
+  console.log("workRoute:request recieved");
   const work = await Hire.find().limit(10);
   res.send(work);
 });
