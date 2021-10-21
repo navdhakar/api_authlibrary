@@ -14,28 +14,21 @@ const HireSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    minlength: 3,
-    maxlength: 50,
+    unique: true,
   },
   contact_no: {
     type: Number,
     required: true,
-    minlength: 3,
-    maxlength: 50,
   },
   project_title: {
     type: String,
     required: true,
-    minlength: 5,
-    maxlength: 1000,
-    unique: true,
   },
   project_description: {
     type: String,
     required: true,
     minlength: 5,
     maxlength: 1000,
-    unique: true,
   },
   technology_required: {
     type: String,
@@ -46,8 +39,6 @@ const HireSchema = new mongoose.Schema({
   time_limit: {
     type: String,
     required: true,
-    minlength: 3,
-    maxlength: 255,
   },
   budget: {
     type: Number,
@@ -58,8 +49,6 @@ const HireSchema = new mongoose.Schema({
   required_experience: {
     type: String,
     required: false,
-    minlength: 3,
-    maxlength: 255,
   },
   //milestone needs to be added
   //give different access rights if admin or not
@@ -77,15 +66,15 @@ const Hire = mongoose.model("Hire", HireSchema);
 //function to validate Hire
 function validateHire(Hire) {
   const schema = Joi.object({
-    company_name: Joi.string().min(3).max(50).required(),
-    email: Joi.string().min(3).max(50).required(),
-    contact_no: Joi.number().min(3).max(50).required(),
-    project_title: Joi.string().min(5).max(255).required().email(),
+    company_name: Joi.string().required(),
+    email: Joi.string().required(),
+    contact_no: Joi.number().required(),
+    project_title: Joi.string().required(),
     project_description: Joi.string().min(3).max(1000).required(),
     technology_required: Joi.string().min(3).max(255).required(),
-    time_limit: Joi.string().min(3).max(255).required(),
-    budget: Joi.number().min(3).max(255).required(),
-    required_experience: Joi.string().min(3).max(255).required(),
+    time_limit: Joi.string().required(),
+    budget: Joi.number().required(),
+    required_experience: Joi.string().required(),
   });
 
   return schema.validate(Hire);

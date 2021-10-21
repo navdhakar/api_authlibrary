@@ -2,6 +2,7 @@ const config = require("config");
 const mongoose = require("mongoose");
 const usersRoute = require("./routes/user.route");
 const hireRoute = require("./routes/hire.route");
+const workRoute = require("./routes/work.route");
 const express = require("express");
 
 const router = express.Router();
